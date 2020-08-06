@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <section>
-        section
-    </section>
+    contact
   </div>
 </template>
 <script>
@@ -11,7 +9,7 @@ export default {
     return {};
   },
   methods: {},
-  components: {}
+  components: {},
 };
 </script>
 <style></style>

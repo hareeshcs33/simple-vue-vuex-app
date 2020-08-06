@@ -9,8 +9,10 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-import vuescroll from 'vue-scroll'
+import vuescroll from 'vue-scroll';
 Vue.use(vuescroll);
+
+import { store } from './store/store';
 
 Vue.use(BootstrapVue);
 
@@ -19,6 +21,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
