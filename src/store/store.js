@@ -12,33 +12,7 @@ export const store = new Vuex.Store({
             return state.counter * 2;
         },
         stringCounter: state => {
-            return state.counter + 'clicks';
+            return state.counter + ' clicks';
         }
     },
-    mutations: {
-        increment: state => {
-            state.counter++;
-        },
-        decrement: state => {
-            state.counter--;
-        }
-    },
-    actions: {
-        increment: ({ commit }) => {
-            commit('increment');
-        },
-        decrement: ({ commit }) => {
-            commit('decrement');
-        },
-        asynIncrement: ({ commit }) => {
-            setTimeout(() => {
-                commit('increment')
-            }, 1000)
-        },
-        asynDecrement: ({ commit }) => {
-            setTimeout(() => {
-                commit('decrement')
-            }, 1000)
-        },
-    }
 });

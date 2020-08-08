@@ -2,23 +2,20 @@
     <div class="container">
         <h4>Home</h4>
         <counter></counter>
-        <double-counter></double-counter>
-        <counter-buttons></counter-buttons>
-        <another-counter-buttons></another-counter-buttons>
+        <result></result>
+        <AnotherResult></AnotherResult>
     </div>
 </template>
 <script>
 import Counter from './counter.vue';
-import CounterButtons from './counter-buttons.vue';
-import DoubleCounter from './double-counter.vue';
-import AnotherCounterButtons from './another-counter-buttons.vue';
+import Result from './result.vue';
+import AnotherResult from './AnotherResult.vue';
 
 export default {
     components: {
         Counter,
-        CounterButtons,
-        DoubleCounter,
-        AnotherCounterButtons,
+        Result,
+        AnotherResult,
     }
 }
 </script>

@@ -1,13 +1,17 @@
 <template>
-    <div>
-        <h1>using state :=> <span>counter</span> : {{counter}}</h1>
-    </div>
+<div>
+    <button class="btn btn-success" @click="increment">Increment</button>
+    <button class="btn btn-danger" @click="decrement">decrement</button>
+</div>
 </template>
 <script>
 export default {
-    computed: {
-        counter(){
-            return this.$store.state.counter;
+    methods: {
+        increment(){
+            this.$store.state.counter++;
+        },
+        decrement(){
+            this.$store.state.counter--;
         }
     }
 }
