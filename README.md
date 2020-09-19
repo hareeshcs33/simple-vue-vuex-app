@@ -1,6 +1,8 @@
 # simple-vue-vuex-app
 Creating simple application using Vue and Vuex.
 
+//run
 //npm run dev
 
-//npm run build  
+//build
+//npm run build
