@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Contact from '../components/contact.vue'
 import About from '../components/about.vue'
 import Home from '../components/home.vue'
+import Todo from '../todo/todo-list.vue'
 
 Vue.use(Router)
 
@@ -25,6 +26,11 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: Contact
+    },
+    {
+      path: '/todo',
+      name: 'todo',
+      component: Todo
     },
   ]
 })

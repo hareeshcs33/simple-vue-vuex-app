@@ -4,31 +4,29 @@
       <div class="home-layout">
         <navigation></navigation>
         <hr />
-        <router-view/>
+        <router-view />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/navigation.vue'
+import Navigation from "@/components/navigation.vue";
 export default {
-  name: 'App',
+  name: "App",
   data() {
-    return {
-      
-    }
+    return {};
   },
   components: {
-    Navigation,
+    Navigation
   }
-}
+};
 </script>
 
 <style>
 #app {
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
-  font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  /* font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #6c757d;
@@ -43,12 +41,16 @@ ul {
   list-style: none;
   padding: 0;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   line-height: 1.2;
   color: #343a40;
 }
 p {
-  font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
 }
 </style>
