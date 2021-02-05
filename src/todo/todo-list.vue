@@ -13,39 +13,17 @@
         enter-active-class="animated fadeInUp"
         leave-active-class="animated fadeOutDown"
       >
-        <div
-          v-for="(todo, index) in todosFiltered"
+        <todo-item
+          v-for="(todo, index) in todos"
           :key="todo.id"
+          :todo="todo"
+          :index="index"
+          @removedTodo="removeTodo"
+          @finishedEdit="finishedEdit"
+          :checkAll="!anyRemaining"
           class="todo-item card my-2 p-2"
         >
-          <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-              <input
-                type="checkbox"
-                class="block mr-1"
-                v-model="todo.completed"
-              />
-              <div
-                v-if="!todo.editing"
-                class="todo-item-label"
-                @dblclick="editTodo(todo)"
-              >
-                {{ todo.title }}
-              </div>
-              <input
-                v-else
-                class="form-control todo-item-edit"
-                type="text"
-                v-model="todo.title"
-                @blur="doneEdit(todo)"
-                @keyup.enter="doneEdit(todo)"
-                @keyup.esc="cancelEdit(todo)"
-                v-focus
-              />
-            </div>
-            <div @click="removeTodo(index)">&times; delete</div>
-          </div>
-        </div>
+        </todo-item>
       </transition-group>
     </div>
     <div class="card p-2">
@@ -102,12 +80,12 @@
   </div>
 </template>
 <script>
+import TodoItem from "./todo-item.vue";
 export default {
   data() {
     return {
       newTodo: "",
       idForTodo: 3,
-      beforeEditCache: "",
       filter: "all",
       todos: [
         {
@@ -125,13 +103,10 @@ export default {
       ]
     };
   },
-  directives: {
-    focus: {
-      inserted: function(el) {
-        el.focus();
-      }
-    }
+  components: {
+    TodoItem
   },
+
   methods: {
     addTodo() {
       if (this.newTodo.trim().length == 0) {
@@ -149,25 +124,15 @@ export default {
     removeTodo(index) {
       this.todos.splice(index, 1);
     },
-    editTodo(todo) {
-      this.beforeEditCache = todo.title;
-      todo.editing = true;
-    },
-    doneEdit(todo) {
-      if (todo.title.trim() == "") {
-        todo.title = this.beforeEditCache;
-      }
-      todo.editing = false;
-    },
-    cancelEdit(todo) {
-      todo.title = this.beforeEditCache;
-      todo.editing = false;
-    },
+
     checkAllTodos() {
       this.todos.forEach(todo => (todo.completed = event.target.checked));
     },
     clearCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed);
+    },
+    finishedEdit(data) {
+      this.todos.splice(data.index, 1, data.todo);
     }
   },
   computed: {
