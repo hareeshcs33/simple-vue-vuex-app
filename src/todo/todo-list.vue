@@ -18,8 +18,6 @@
           :key="todo.id"
           :todo="todo"
           :index="index"
-          @removedTodo="removeTodo"
-          @finishedEdit="finishedEdit"
           :checkAll="!anyRemaining"
           class="todo-item card my-2 p-2"
         >
@@ -28,59 +26,28 @@
     </div>
     <div class="card p-2">
       <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <input
-            type="checkbox"
-            class="block mr-1"
-            :checked="!anyRemaining"
-            @change="checkAllTodos"
-          />check all
-        </div>
-        <div>{{ remaining }} items left</div>
+        <todo-check-all :anyRemaining="anyRemaining"></todo-check-all>
+        <todo-item-remaining :remaining="remaining"></todo-item-remaining>
       </div>
     </div>
     <div class="card p-2">
       <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <button
-            class="btn btn-outline-dark btn-sm px-3"
-            :class="{ 'btn-success': filter == 'all' }"
-            @click="filter = 'all'"
-          >
-            All
-          </button>
-          <button
-            class="btn btn-outline-dark btn-sm px-3 mx-1"
-            :class="{ 'btn-success': filter == 'active' }"
-            @click="filter = 'active'"
-          >
-            Active
-          </button>
-          <button
-            class="btn btn-outline-dark btn-sm px-3"
-            :class="{ 'btn-success': filter == 'completed' }"
-            @click="filter = 'completed'"
-          >
-            Completed
-          </button>
-        </div>
-        <div>
-          <transition name="fade">
-            <button
-              class="btn btn-sm btn-danger"
-              v-if="showClearCompletedButton"
-              @click="clearCompleted"
-            >
-              clear completed
-            </button>
-          </transition>
-        </div>
+        <todo-filters></todo-filters>
+        <transition name="fade">
+          <todo-clear-completed
+            :showClearCompletedButton="showClearCompletedButton"
+          ></todo-clear-completed>
+        </transition>
       </div>
     </div>
   </div>
 </template>
 <script>
 import TodoItem from "./todo-item.vue";
+import TodoItemRemaining from "./todo-item-remaining.vue";
+import TodoCheckAll from "./todo-check-all.vue";
+import TodoFilters from "./todo-filters.vue";
+import TodoClearCompleted from "./todo-clear-completed.vue";
 export default {
   data() {
     return {
@@ -104,9 +71,26 @@ export default {
     };
   },
   components: {
-    TodoItem
+    TodoItem,
+    TodoItemRemaining,
+    TodoCheckAll,
+    TodoFilters,
+    TodoClearCompleted
   },
-
+  created() {
+    eventBus.$on("removedTodo", index => this.removeTodo(index));
+    eventBus.$on("finishedEdit", data => this.finishedEdit(data));
+    eventBus.$on("checkAllChanged", checked => this.checkAllTodos(checked));
+    eventBus.$on("filterChanged", filter => (this.filter = filter));
+    eventBus.$on("clearCompletedTodos", () => this.clearCompleted());
+  },
+  beforeDestroy() {
+    eventBus.$off("removedTodo", index => this.removeTodo(index));
+    eventBus.$off("finishedEdit", data => this.finishedEdit(data));
+    eventBus.$off("checkAllChanged", checked => this.checkAllTodos(checked));
+    eventBus.$off("filterChanged", filter => (this.filter = filter));
+    eventBus.$off("clearCompletedTodos", () => this.clearCompleted());
+  },
   methods: {
     addTodo() {
       if (this.newTodo.trim().length == 0) {

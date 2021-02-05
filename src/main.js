@@ -14,6 +14,8 @@ Vue.use(vuescroll);
 
 import { store } from './store/store';
 
+window.eventBus = new Vue();
+
 Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false
