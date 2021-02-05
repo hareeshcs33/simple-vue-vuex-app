@@ -81,10 +81,13 @@ export default {
       }
       this.editing = false;
       this.$emit("finishedEdit", {
-        id: this.id,
-        title: this.title,
-        completed: this.completed,
-        editing: this.editing
+        index: this.index,
+        todo: {
+          id: this.id,
+          title: this.title,
+          completed: this.completed,
+          editing: this.editing
+        }
       });
     },
     cancelEdit() {

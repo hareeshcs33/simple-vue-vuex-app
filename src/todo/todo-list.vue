@@ -14,7 +14,7 @@
         leave-active-class="animated fadeOutDown"
       >
         <todo-item
-          v-for="(todo, index) in todos"
+          v-for="(todo, index) in todosFiltered"
           :key="todo.id"
           :todo="todo"
           :index="index"
