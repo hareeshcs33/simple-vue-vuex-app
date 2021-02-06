@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center font-weight-bold">
     <input
       type="checkbox"
       class="block mr-1"

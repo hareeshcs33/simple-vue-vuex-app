@@ -24,7 +24,8 @@
         </todo-item>
       </transition-group>
     </div>
-    <div class="card p-2">
+    <hr />
+    <div class="card p-2 mb-3">
       <div class="d-flex align-items-center justify-content-between">
         <todo-check-all :anyRemaining="anyRemaining"></todo-check-all>
         <todo-item-remaining :remaining="remaining"></todo-item-remaining>
@@ -85,11 +86,11 @@ export default {
     eventBus.$on("clearCompletedTodos", () => this.clearCompleted());
   },
   beforeDestroy() {
-    eventBus.$off("removedTodo", index => this.removeTodo(index));
-    eventBus.$off("finishedEdit", data => this.finishedEdit(data));
-    eventBus.$off("checkAllChanged", checked => this.checkAllTodos(checked));
-    eventBus.$off("filterChanged", filter => (this.filter = filter));
-    eventBus.$off("clearCompletedTodos", () => this.clearCompleted());
+    eventBus.$off("removedTodo");
+    eventBus.$off("finishedEdit");
+    eventBus.$off("checkAllChanged");
+    eventBus.$off("filterChanged");
+    eventBus.$off("clearCompletedTodos");
   },
   methods: {
     addTodo() {
@@ -116,7 +117,8 @@ export default {
       this.todos = this.todos.filter(todo => !todo.completed);
     },
     finishedEdit(data) {
-      this.todos.splice(data.index, 1, data.todo);
+      const index = this.todos.findIndex(item => item.id == data.id);
+      this.todos.splice(index, 1, data);
     }
   },
   computed: {
