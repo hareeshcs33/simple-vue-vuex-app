@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
 import 'bootstrap'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 // Import the styles directly. (Or you could add them via script tags.)
@@ -12,9 +13,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import vuescroll from 'vue-scroll';
 Vue.use(vuescroll);
 
+
+
 import { store } from './store/store';
 
 window.eventBus = new Vue();
+
+window.axios = axios;
+Vue.use(axios);
 
 Vue.use(BootstrapVue);
 
