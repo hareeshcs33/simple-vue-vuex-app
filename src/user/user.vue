@@ -1,11 +1,14 @@
 <template>
   <div class="container">
     <div class="row">
+      <div v-if="!dataLoaded">Loading...</div>
       <user-item
         v-for="(data, index) in filteredUserData"
         :data="data"
         :key="data.id"
         :index="index"
+        @deleteItem="deleteItem"
+        v-else
       ></user-item>
     </div>
     <div class="d-flex align-items-center justify-content-end">
@@ -24,7 +27,8 @@ export default {
   data() {
     return {
       userData: null,
-      userDataItems: 0
+      userDataItems: 0,
+      dataLoaded: true
     };
   },
   methods: {
@@ -34,6 +38,9 @@ export default {
     nextList() {
       console.log("next list");
       console.log(this.userData);
+    },
+    deleteItem(index) {
+      this.userData.splice(index, 1);
     }
   },
   computed: {
